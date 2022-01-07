@@ -20,22 +20,14 @@ class ProductRepositoryTest {
 
         repository.removeById(0);
 
-        assertEquals(null, repository.findById(0));
+        assertNull(repository.findById(0));
     }
 
     @Test
     public void shouldThrowExceptionIfTryRemoveNotExistElement() {
         repository = new ProductRepository();
 
-        try {
-            repository.removeById(10);
-        }catch (NotFoundException exception)
-        {
-            String expected = "Product not found: id=10";
-            String actual = exception.getMessage();
-
-            assertEquals(expected, actual);
-        }
+        assertThrows(NotFoundException.class, ()->{repository.removeById(10);}, "Product not found: id=10");
     }
 
     @Test
